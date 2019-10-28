@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts 
+Configuration 1.3//EN" "http://struts.apache.org/dtds/struts-config_1_3.dtd">
+<struts-config>
+	<form-beans>
+		<form-bean name="userForm" type="form.UserForm" />
+		<form-bean name="listUserForm" type="form.ListUserForm" />
+		
+		<form-bean name="busForm" type="form.BusForm" />
+		<form-bean name="listBusForm" type="form.ListBusForm" />
+		
+		<form-bean name="busTypeForm" type="form.BusTypeForm" />
+		<form-bean name="listBusTypeForm" type="form.ListBusTypeForm" />
+		
+		<form-bean name="busesForm" type="form.BusesForm" />
+		<form-bean name="listBusesForm" type="form.ListBusesForm" />
+		
+		<form-bean name="transportServiceProviderForm" type="form.TransportServiceProviderForm" />
+		
+		<form-bean name="tripForm" type="form.TripForm" />
+		<form-bean name="listTripForm" type="form.ListTripForm" />
+		
+		<form-bean name="ticketForm" type="form.TicketForm" />
+		<form-bean name="searchTicketForm" type="form.SearchTicketForm" />
+		<form-bean name="listTicketForm" type="form.ListTicketForm" />
+	</form-beans>
+	<action-mappings>
+		<action input="/pages/login.jsp" name="userForm"
+			path="/login" scope="request" type="action.LoginAction">
+			<forward name="success-admin" path="/admin/listUser.do" redirect="true"/>
+			<forward name="success-user" path="/user/listBus.do" redirect="true"/>
+			<forward name="success-create-nx" path="/pages/user/CreateTransportServiceProvider.jsp"/>
+			<forward name="fail" path="/pages/login.jsp" />
+			<forward name="render" path="/pages/login.jsp" redirect="true"/>
+			<forward name="success-customer" path="/#" redirect="true"/>
+		</action>
+		<action input="/" name="userForm"
+			path="/logout" scope="request" type="action.LogoutAction">
+			<forward name="success" path="/" redirect="true"/>
+			<forward name="fail" path="/" redirect="true"/>
+		</action>
+		<action input="/pages/Register.jsp" name="userForm"
+			path="/register" scope="request" type="action.RegisterAction">
+			<forward name="success" path="/login.do" redirect="true"/>
+			<forward name="fail" path="/pages/Register.jsp" />
+			<forward name="render" path="/pages/Register.jsp" redirect="true"/>
+		</action>
+		
+		<action input="/pages/login.jsp" name="userForm"
+			path="/account" scope="request" type="action.ManageAccount">
+			<forward name="success" path="/pages/AccountManagement.jsp" redirect="true"/>
+		</action>
+		<action input="/pages/AccountManagement.jsp" name="userForm"
+			path="/account/changePassword" scope="request" type="action.ChangePasswordAction">
+			<forward name="render" path="/pages/ChangePassword.jsp" redirect="true"/>
+			<forward name="success" path="/account/changeInfo.do" redirect="true"/>
+			
+		</action>
+		<action input="/" name="userForm"
+			path="/account/edit" scope="request" type="action.EditAccount">
+			<forward name="render" path="/pages/EditAccountInformation.jsp" redirect="true"/>
+			<forward name="success" path="/" redirect="true"/>
+			
+		</action>
+		
+		
+		<action input="/pages/login.jsp" name="listUserForm"
+			path="/admin/listUser" scope="request" type="action.ListUserAction">
+			<forward name="render" path="/pages/admin/UserManagement.jsp" />
+		</action>
+		<action input="/pages/admin/UserManagement.jsp" name="userForm"
+			path="/admin/user/edit" scope="request" type="action.EditUserAction">
+			<forward name="render" path="/pages/admin/EditUser.jsp" />
+			<forward name="success" path="/admin/listUser.do" />
+			<forward name="fail" path="/admin/listUser.do" />
+		</action>
+		<action input="/pages/admin/UserManagement.jsp" name="listUserForm"
+			path="/admin/user/delete" scope="request" type="action.DeleteUserAction">
+			<forward name="success" path="/admin/listUser.do" redirect="true"/>
+			<forward name="fail" path="/admin/listUser.do" redirect="true" />
+		</action>
+		
+		<action input="/pages/login.jsp" name="listUserForm"
+			path="/admin/listPenddingUser" scope="request" type="action.ListPenddingUserAction">
+			<forward name="success" path="/pages/admin/ConfirmRegisterUser.jsp" />
+			<forward name="fail" path="/pages/admin/ConfirmRegisterUser.jsp" />
+			<forward name="render" path="/pages/admin/ConfirmRegisterUser.jsp" />
+		</action>
+		<action input="/pages/login.jsp" name="userForm"
+			path="/user/init" scope="request" type="action.InitUserAction">
+			<forward name="init" path="/pages/user/InitPage.jsp" />
+			<forward name="render" path="/pages/wellcome.jsp" />
+		</action>
+		<action input="/pages/user/CreateTransportServiceProvider.jsp" name="transportServiceProviderForm"
+			path="/user/createTransportServiceProvider" scope="request" type="action.CreateTransportServiceProviderAction">
+			<forward name="success" path="/user/listBus.do" />
+			<forward name="fail" path="/pages/wellcome.jsp" />
+		</action>
+		
+		
+		<action input="/pages/login.jsp" name="listBusForm"
+			path="/user/listBus" scope="request" type="action.ListBusAction">
+			<forward name="success" path="/pages/user/ListBus.jsp" />
+			<forward name="fail" path="/pages/wellcome.jsp" />
+		</action>
+		<action input="/pages/user/ListBus.jsp" name="busForm"
+			path="/user/addNewBus" scope="request" type="action.AddBusAction">
+			<forward name="success" path="/user/listBus.do" redirect="true"/>
+			<forward name="fail" path="/pages/user/AddNewBus.jsp" />
+			<forward name="render" path="/pages/user/AddNewBus.jsp" />
+		</action>
+		<action input="/pages/user/ListBus.jsp" name="busForm"
+			path="/user/editBus" scope="request" type="action.EditBusAction">
+			<forward name="success" path="/user/listBus.do" redirect="true"/>
+			<forward name="fail" path="/pages/user/EditBus.jsp" />
+			<forward name="render" path="/pages/user/EditBus.jsp" />
+		</action>
+		<action input="/pages/user/ListBus.jsp" name="busForm"
+			path="/user/deleteBus" scope="request" type="action.DeleteBusAction">
+			<forward name="success" path="/user/listBus.do" redirect="true"/>
+			<forward name="fail" path="/user/listBus.do" redirect="true"/>
+		</action>
+		
+		
+		<action input="/pages/login.jsp" name="listBusTypeForm"
+			path="/admin/listBusType" scope="request" type="action.ListBusTypeAction">
+			<forward name="success" path="/pages/admin/ListBusType.jsp" />
+			<forward name="fail" path="/pages/wellcome.jsp" />
+		</action>
+		<action input="/pages/admin/ListBusType.jsp" name="busTypeForm"
+			path="/admin/addNewBusType" scope="request" type="action.AddBusTypeAction">
+			<forward name="success" path="/admin/listBusType.do" redirect="true"/>
+			<forward name="fail" path="/pages/admin/AddNewBusType.jsp" />
+			<forward name="render" path="/pages/admin/AddNewBusType.jsp" />
+		</action>
+		<action input="/pages/admin/ListBusType.jsp" name="busTypeForm"
+			path="/admin/editBusType" scope="request" type="action.EditBusTypeAction">
+			<forward name="success" path="/admin/listBusType.do" redirect="true"/>
+			<forward name="fail" path="/pages/admin/EditBusType.jsp" />
+			<forward name="render" path="/pages/admin/EditBusType.jsp" />
+		</action>
+		<action input="/pages/admin/ListBus.jsp" name="busTypeForm"
+			path="/admin/deleteBusType" scope="request" type="action.DeleteBusTypeAction">
+			<forward name="success" path="/admin/listBusType.do" redirect="true"/>
+			<forward name="fail" path="/admin/listBusType.do" redirect="true"/>
+		</action>
+		
+		
+		<action input="/pages/user/ListBus.jsp" name="listBusesForm"
+			path="/user/listBuses" scope="request" type="action.ListBusesAction">
+			<forward name="success" path="/pages/user/ListBuses.jsp" />
+			<forward name="fail" path="/user/listBus.do" />
+		</action>
+		<action input="/pages/user/ListBus.jsp" name="listBusesForm"
+			path="/user/listBusesDetail" scope="request" type="action.ListBusesDetailAction">
+			<forward name="success" path="/pages/user/ListBusesDetail.jsp" />
+			<forward name="fail" path="/user/listBus.do" />
+		</action>
+		<action input="/pages/user/ListBus.jsp" name="busesForm"
+			path="/user/addNewBuses" scope="request" type="action.AddBusesAction">
+			<forward name="success" path="/user/listBuses.do" redirect="true" />
+			<forward name="fail" path="/user/listBuses.do" />
+			<forward name="render" path="/pages/user/AddNewBuses.jsp" />
+		</action>
+		<action input="/pages/user/ListBus.jsp" name="busesForm"
+			path="/user/editBuses" scope="request" type="action.EditBusesAction">
+			<forward name="success" path="/user/listBuses.do" />
+			<forward name="fail" path="/pages/user/EditBuses.jsp" />
+			<forward name="render" path="/pages/user/EditBuses.jsp" />
+		</action>
+		<action input="/pages/user/ListBus.jsp" name="busesForm"
+			path="/user/editBusesDetail" scope="request" type="action.EditBusesDetailAction">
+			<forward name="success" path="/user/listBuses.do" redirect="true"/>
+			<forward name="fail" path="/pages/user/EditBusesDetail.jsp" />
+			<forward name="render" path="/pages/user/EditBusesDetail.jsp" />
+		</action>
+		<action input="/pages/user/ListBus.jsp" name="busesForm"
+			path="/user/deleteBusesDetail" scope="request" type="action.DeleteBusesDetailAction">
+			<forward name="success" path="/user/listBuses.do" redirect="true"/>
+			<forward name="fail" path="/user/listBuses.do" />
+		</action>
+		<action input="/pages/user/ListBus.jsp" name="busesForm"
+			path="/user/deleteBuses" scope="request" type="action.DeleteBusesAction">
+			<forward name="success" path="/user/listBuses.do" redirect="true"/>
+			<forward name="fail" path="/user/listBuses.do" />
+		</action>
+		
+		<action input="/pages/user/ListBus.jsp" name="busForm"
+			path="/user/setLayout" scope="request" type="action.SetLayoutAction">
+			<forward name="success" path="/user/listBus.do" />
+			<forward name="render" path="/pages/user/SettupChairLayout.jsp" />
+			<forward name="fail" path="/user/listBus.do" />
+		</action>
+		
+		<action input="/pages/user/ListBus.jsp" name="ticketForm"
+			path="/bookTicket" scope="request" type="action.BookTicketAction">
+			<forward name="success" path="/ticket/info.do" redirect="true"/>
+			<forward name="render" path="/pages/BookTicket.jsp" />
+			<forward name="fail" path="/" redirect="true"/>
+			<forward name="login" path="/login.do" redirect="true"/>
+		</action>
+		
+		<action input="/login.jsp" name="userForm"
+			path="/account/changeInfo" scope="request" type="action.ChangeAccountInfoAction">
+			<forward name="success" path="/account/changeInfo.do" redirect="true"/>
+			<forward name="render" path="/pages/ChangeAccountInfo.jsp" />
+			<forward name="fail" path="/pages/ChangeAccountInfo.jsp" />
+		</action>
+		
+		<action input="/login.jsp" name="listTripForm"
+			path="/user/listTrip" scope="request" type="action.ListTripAction">
+			<forward name="success" path="/user/ListTrip.jsp" />
+			<forward name="fail" path="/pages/HomePage.jsp" />
+		</action>
+		<action input="/pages/user/ListTrip.jsp" name="tripForm"
+			path="/user/editTrip" scope="request" type="action.EditTripAction">
+			<forward name="success" path="/user/listTrip.do" />
+			<forward name="fail" path="/user/listTrip.do" />
+			<forward name="render" path="/pages/user/EditTrip.jsp" />
+			
+		</action>
+		<action input="/pages/user/ListTrip.jsp" name="tripForm"
+			path="/user/deleteTrip" scope="request" type="action.DeleteTripAction">
+			<forward name="success" path="/user/listTrip.do" />
+			<forward name="fail" path="/user/listTrip.do" />
+		</action>
+		
+		<action input="/pages/user/ListTrip.jsp" name="tripForm"
+			path="/api/getDistrictByProvince" scope="request" type="action.api.ApiGetDistrictAction">
+			<forward name="success" path="/pages/api/RestDistrict.jsp" />
+		</action>
+		<action input="/pages/HomePage.jsp" name="listTicketForm"
+			path="/listTicket" scope="request" type="action.ListTicketAction">
+			<forward name="success" path="/pages/ListTicket.jsp" />
+			<forward name="fail" path="/pages/HomePage.jsp" />
+		</action>
+		<!-- vu config -->
+		<action input="/pages/user/ListBus.jsp" name="searchTicketForm"
+			path="/searchTicket" scope="request" type="action.SearchTicketAction">
+			<forward name="success" path="/user/listBus.do" />
+			<forward name="render" path="/pages/ListTicket.jsp" />
+			<forward name="fail" path="/user/listBus.do" />
+		</action>
+		<action input="/pages/HomePage.jsp" name="DistrictForm"
+			path="/homePage" scope="request" type="action.HomePageAction">
+			<forward name="success" path="/user/listBus.do" />
+			<forward name="render" path="/pages/HomePage.jsp" />
+			<forward name="fail" path="/user/listBus.do" />
+		</action>
+		<action input="/pages/HomePage.jsp" name="DistrictForm"
+			path="/api/getDistrict" scope="request" type="action.GetDistrictAction">
+			<forward name="success" path="/pages/api/district.jsp" />
+		</action>
+		<action input="/pages/HomePage.jsp" name="DistrictForm"
+			path="/api/getCountries" scope="request" type="action.GetDistrictAction">
+			<forward name="success" path="/pages/api/district.jsp" />
+		</action>
+		
+		<action input="/pages/HomePage.jsp" name="DistrictForm"
+			path="/api/getDiadiem" scope="request" type="action.GetDiaDiemAction">
+			<forward name="success" path="/pages/api/diadiem.jsp" />
+		</action>
+		
+		<action input="/pages/HomePage.jsp" name="DistrictForm"
+			path="/api/getProvince" scope="request" type="action.GetProvinceAction">
+			<forward name="success" path="/pages/api/province.jsp" />
+		</action>
+		<!-- end  -->
+		<!-- extend config -->
+		<action input="/pages/HomePage.jsp" name="ticketForm"
+			path="/ticket/delete" scope="request" type="action.DeleteTicketAction">
+			<forward name="success" path="/ticket/info.do" redirect="true"/>
+			<forward name="render" path="/pages/DeleteTicket.jsp" />
+			<forward name="fail" path="/ticket/delete.do" />
+		</action>
+		<action input="/pages/HomePage.jsp" name="userForm"
+			path="/transporter/register" scope="request" type="action.RegisterToBeTransporterAction">
+			<forward name="success" path="/" />
+			<forward name="render" path="/pages/RegisterToBeTransporter.jsp" />
+			<forward name="fail" path="/" />
+		</action>
+		<action input="/pages/HomePage.jsp" name="ticketForm"
+			path="/ticket/info" scope="request" type="action.TicketInforAction">
+			<forward name="render" path="/pages/TicketInfor.jsp" />
+			<forward name="fail" path="/pages/TicketInfor.jsp" />
+		</action>
+		<!-- end -->
+		<action input="/pages/login.jsp" name="listTicketForm"
+			path="/user/filterTicket" scope="request" type="action.FilterTicketAction">
+			<forward name="render" path="/pages/user/ListTicketManagement.jsp" />
+			<forward name="fail" path="/user/listTicket.do" redirect="true" />
+		</action>
+		<action input="/pages/login.jsp" name="listTicketForm"
+			path="/user/listTicket" scope="request" type="action.ListTicketManageAction">
+			<forward name="render" path="/pages/user/ListTicketManagement.jsp" />
+		</action>
+		
+		<action input="/pages/user/ListTicket.jsp" name="ticketForm"
+			path="/user/ticket/delete" scope="request" type="action.DeleteTicketManageAction">
+			<forward name="success" path="/user/listTicket.do" />
+			<forward name="fail" path="/user/listTicket.do" />
+		</action>
+		
+		<action input="/pages/user/ListTicket.jsp" name=""
+			path="/404" scope="request" type="action.PageNotFoundAction">
+			<forward name="success" path="/pages/404.jsp" />
+		</action>
+		
+		
+		<action input="/UpdateConfirmRegisterUser.jsp" name="userForm"
+			path="/confirm/registerUser" scope="request" type="action.UpdateConfirmRegisterUserAction">
+			<forward name="changer" path="/pages/admin/UpdateConfirmRegisterUser.jsp" />
+			<forward name="load" path="/pages/admin/UpdateConfirmRegisterUser.jsp" />
+				<forward name="success" path="/admin/listPenddingUser.do" />
+		</action>
+		
+		
+		
+		
+		<action input="/pages/fogotpass.jsp" name="userForm"
+			path="/quen-mat-khau" scope="request" type="action.SendEmailUserAction">
+			<forward name="email" path="/pages/fogotpass.jsp" />
+			<forward name="thanhCong" path="/pages/fogotpass.jsp" />
+			
+		</action>
+		
+	</action-mappings>
+	
+</struts-config>
